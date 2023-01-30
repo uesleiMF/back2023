@@ -2,8 +2,8 @@ const {StartServer,ConnectDb,app}=require("./Setup/index");
 const User=require("./Routes/User")
 const Auth=require("./Routes/Auth")
 const Produc=require("./Routes/Products")
-const Order=require("./Routes/Order")
-const Cart=require("./Routes/Cart")
+const Order=require("./Routes/order")
+const Cart=require("./Routes/cart")
 const cors=require("cors")
 
 StartServer();
