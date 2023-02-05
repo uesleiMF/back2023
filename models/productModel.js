@@ -20,7 +20,7 @@ const productSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      required: [true, "Please add a category"],
+      required: [true, "Please add a categoria"],
       trim: true,
     },
     quantity: {
