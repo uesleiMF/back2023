@@ -22,7 +22,7 @@ const contactUs = asyncHandler(async (req, res) => {
   const reply_to = user.email;
   try {
     await sendEmail(subject, message, send_to, sent_from, reply_to);
-    res.status(200).json({ success: true, message: "Email Sent" });
+    res.status(200).json({ success: true, message: "E-mail enviado" });
   } catch (error) {
     res.status(500);
     throw new Error("E-mail não enviado, tente novamente");
