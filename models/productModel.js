@@ -40,8 +40,8 @@ const productSchema = mongoose.Schema(
     },
   
   date: {
-    type: String,
-    required: [true, "Please add a date"],
+    type: Date,
+    required: [true, "Please add a Date"],
     trim: true,
   },
     image: {

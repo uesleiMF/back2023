@@ -121,7 +121,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       });
     } catch (error) {
       res.status(500);
-      throw new Error("Image could not be uploaded");
+      throw new Error("A imagem não pôde ser carregada");
     }
 
     fileData = {
