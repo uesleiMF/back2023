@@ -93,7 +93,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 // Update Product
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, quantity, price, description } = req.body;
+  const { name, category, quantity, price, date, description } = req.body;
   const { id } = req.params;
 
   const product = await Product.findById(id);
