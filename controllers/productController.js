@@ -5,10 +5,10 @@ const cloudinary = require("cloudinary").v2;
 
 // Create Prouct
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, sku, category, quantity, price, description } = req.body;
+  const { name, sku, category, quantity, price, description, date } = req.body;
 
   //   Validation
-  if (!name || !category || !quantity || !price || !description) {
+  if (!name || !category || !quantity || !price || !description || !date) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -45,6 +45,7 @@ const createProduct = asyncHandler(async (req, res) => {
     quantity,
     price,
     description,
+    date,
     image: fileData,
   });
 
@@ -140,6 +141,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       quantity,
       price,
       description,
+      date,
       image: Object.keys(fileData).length === 0 ? product?.image : fileData,
     },
     {
