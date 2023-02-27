@@ -1,10 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const Casal = require("../models/casalModel");
+const Product = require("../models/productModel");
 const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
 // Create Prouct
-const createCasal = asyncHandler(async (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
   const { name, sku, category, quantity, price, description, date } = req.body;
 
   //   Validation
@@ -37,7 +37,7 @@ const createCasal = asyncHandler(async (req, res) => {
   }
 
   // Create Product
-  const casal = await Casal.create({
+  const product = await Product.create({
     user: req.user.id,
     name,
     sku,
@@ -49,62 +49,62 @@ const createCasal = asyncHandler(async (req, res) => {
     image: fileData,
   });
 
-  res.status(201).json(casal);
+  res.status(201).json(product);
 });
 
 // Get all Products
-const getCasais = asyncHandler(async (req, res) => {
-  const casais = await Casal.find({ user: req.user.id }).sort("-createdAt");
-  res.status(200).json(casais);
+const getProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({ user: req.user.id }).sort("-createdAt");
+  res.status(200).json(products);
 });
 
 // Get single product
-const getCasal = asyncHandler(async (req, res) => {
-  const casal = await Casal.findById(req.params.id);
+const getProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
   // if product doesnt exist
-  if (!casal) {
+  if (!product) {
     res.status(404);
     throw new Error("Product not found");
   }
   // Match product to its user
-  if (casal.user.toString() !== req.user.id) {
+  if (product.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
-  res.status(200).json(casal);
+  res.status(200).json(product);
 });
 
 // Delete Product
-const deleteCasal = asyncHandler(async (req, res) => {
-  const casal = await Casal.findById(req.params.id);
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
   // if product doesnt exist
-  if (!casal) {
+  if (!product) {
     res.status(404);
     throw new Error("Product not found");
   }
   // Match product to its user
-  if (casal.user.toString() !== req.user.id) {
+  if (product.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
-  await casal.remove();
+  await product.remove();
   res.status(200).json({ message: "Product deleted." });
 });
 
 // Update Product
-const updateCasal = asyncHandler(async (req, res) => {
+const updateProduct = asyncHandler(async (req, res) => {
   const { name, category, quantity, price, date, description } = req.body;
   const { id } = req.params;
 
-  const casal = await Casal.findById(id);
+  const product = await Product.findById(id);
 
   // if product doesnt exist
-  if (!casal) {
+  if (!product) {
     res.status(404);
     throw new Error("Product not found");
   }
   // Match product to its user
-  if (casal.user.toString() !== req.user.id) {
+  if (product.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
   }
@@ -133,7 +133,7 @@ const updateCasal = asyncHandler(async (req, res) => {
   }
 
   // Update Product
-  const updatedCasal = await Casal.findByIdAndUpdate(
+  const updatedProduct = await Product.findByIdAndUpdate(
     { _id: id },
     {
       name,
@@ -142,7 +142,7 @@ const updateCasal = asyncHandler(async (req, res) => {
       price,
       description,
       date,
-      image: Object.keys(fileData).length === 0 ? casal?.image : fileData,
+      image: Object.keys(fileData).length === 0 ? product?.image : fileData,
     },
     {
       new: true,
@@ -150,13 +150,13 @@ const updateCasal = asyncHandler(async (req, res) => {
     }
   );
 
-  res.status(200).json(updatedCasal);
+  res.status(200).json(updatedProduct);
 });
 
 module.exports = {
-  createCasal: createCasal,
-  getCasais: getCasais,
-  getCasal: getCasal,
-  deleteCasal: deleteCasal,
-  updateCasal: updateCasal,
+  createProduct,
+  getProducts,
+  getProduct,
+  deleteProduct,
+  updateProduct,
 };

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const casalSchema = mongoose.Schema(
+const productSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -54,5 +54,5 @@ const casalSchema = mongoose.Schema(
   }
 );
 
-const Casal = mongoose.model("Casal", casalSchema);
-module.exports = Casal;
+const Product = mongoose.model("Product", productSchema);
+module.exports = Product;
