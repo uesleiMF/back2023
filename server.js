@@ -28,7 +28,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes Middleware
 app.use("/api/users", userRoute);
-app.use("/api/products", casalRoute);
+app.use("/api/casais", casalRoute);
 app.use("/api/contactus", contactRoute);
 
 // Routes
