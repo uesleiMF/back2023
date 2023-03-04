@@ -10,7 +10,7 @@ const createProduct = asyncHandler(async (req, res) => {
   //   Validation
   if (!name || !category || !quantity || !price || !description || !date) {
     res.status(400);
-    throw new Error("Please fill in all fields");
+    throw new Error("Por favor preencha todos os campos");
   }
 
   // Handle Image upload
@@ -25,7 +25,7 @@ const createProduct = asyncHandler(async (req, res) => {
       });
     } catch (error) {
       res.status(500);
-      throw new Error("Image could nao be uploaded");
+      throw new Error("A imagem não pode ser carregada");
     }
 
     fileData = {
@@ -64,12 +64,12 @@ const getProduct = asyncHandler(async (req, res) => {
   // if product doesnt exist
   if (!product) {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error("Casal não encontrado");
   }
   // Match product to its user
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error("User not authorized");
+    throw new Error("Usuario não autorizado");
   }
   res.status(200).json(product);
 });
@@ -80,15 +80,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
   // if product doesnt exist
   if (!product) {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error("Casal não encontrado");
   }
   // Match product to its user
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error("User not authorized");
+    throw new Error("Usuario não autorizado");
   }
   await product.remove();
-  res.status(200).json({ message: "Product deleted." });
+  res.status(200).json({ message: "Casal deletado." });
 });
 
 // Update Product
@@ -101,12 +101,12 @@ const updateProduct = asyncHandler(async (req, res) => {
   // if product doesnt exist
   if (!product) {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error("Casal não encontrado");
   }
   // Match product to its user
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error("User not authorized");
+    throw new Error("Usuario não autorizado");
   }
 
   // Handle Image upload
